@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 export default context => {
   // set router's location
   router.push(context.url)
-
+  console.log(context.helloWorld);
   const s = isDev && Date.now()
 
   // Call preFetch hooks on components matched by the route.
@@ -29,7 +29,11 @@ export default context => {
     // inline the state in the HTML response. This allows the client-side
     // store to pick-up the server-side state without having to duplicate
     // the initial data fetching on the client.
-    context.initialState = store.state
+
+    let helloWorld = context.helloWorld;
+    context.initialState = Object.assign({}, store.state, { helloWorld });
+    store.replaceState(context.initialState);
+
     return app
   })
 }

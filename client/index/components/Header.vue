@@ -5,8 +5,9 @@
     height: 4rem;
     line-height: 4rem;
     padding: 0 2rem;
-    box-shadow: 0 0 1px rgba(0,0,0,.15);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .15);
 }
+
 .header-logo {
     margin-right: 1rem;
     flex-shrink: 0;
@@ -16,35 +17,43 @@
     color: #000000;
     text-decoration: none;
 }
+
 .header-logo-image {
     height: 1.4rem;
     vertical-align: top;
     margin: 1.4rem 0 0 0;
 }
+
 .header-logo-content {
     height: 4rem;
     vertical-align: text-bottom;
 }
+
 .header-nav {
     width: 100%;
     display: flex;
 }
+
 .header-nav-item {
     text-decoration: none;
     color: #777777;
     display: block;
     margin: 0 1rem;
 }
+
 .header-nav-item.router-link-active {
     color: #03A9F4;
 }
+
 .header-sign {
     flex-shrink: 0;
 }
+
 .header-sign .um-button {
     line-height: 1.5rem;
     min-width: 4rem;
 }
+
 .header-nav-m {
     display: none;
     position: absolute;
@@ -55,6 +64,7 @@
     text-align: center;
     font-size: 2rem;
 }
+
 .header-nav-m-list {
     position: absolute;
     z-index: 100;
@@ -65,6 +75,7 @@
     left: 0;
     border-top: 1px solid #f7f7f7;
 }
+
 .header-nav-item-m {
     width: 100%;
     display: block;
@@ -75,32 +86,37 @@
     text-decoration: none;
     color: #333;
 }
+
 .header-nav-enter-active {
-  animation: header-nav-in .3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation: header-nav-in .3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
 }
+
 .header-nav-leave-active {
-  animation: header-nav-out .3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation: header-nav-out .3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
 }
+
 @keyframes header-nav-in {
     0% {
-        transform: translate3d(0,30%,0);
+        transform: translate3d(0, 30%, 0);
         opacity: 0;
     }
     100% {
-        transform: translate3d(0,0,0);
+        transform: translate3d(0, 0, 0);
         opacity: 1;
     }
 }
+
 @keyframes header-nav-out {
     0% {
-        transform: translate3d(0,0,0);
+        transform: translate3d(0, 0, 0);
         opacity: 1;
     }
     100% {
-        transform: translate3d(0,30%,0);
+        transform: translate3d(0, 30%, 0);
         opacity: 0;
     }
 }
+
 @media all and (max-width: 768px) {
     .header-nav-item {
         display: none;
@@ -119,6 +135,11 @@
 </style>
 <template>
     <header class="header">
+        <div>
+            <h2>
+                {{helloWorld}}</h2>
+        </div>
+        <hr>
         <div class="header-nav-m" @click="toggleMNav">
             <div class="header-nav-m-menu ion-navicon"></div>
         </div>
@@ -137,15 +158,15 @@
         <slot></slot>
         <router-link class="header-logo" to="/login" v-if="!User">
             <div class="header-sign">
-                <button :button="button.signUp">登录</button>
-                <button :button="button.signIn">注册</button>
+                <button :button="button.signUp">signup</button>
+                <button :button="button.signIn">sign in</button>
             </div>
         </router-link>
     </header>
 </template>
 <script>
 export default {
-    data () {
+    data() {
         return {
             button: {
                 signIn: {
@@ -164,23 +185,26 @@ export default {
         }
     },
     computed: {
-        HeaderNav () {
+        helloWorld() {
+            return this.$store.state.helloWorld;
+        },
+        HeaderNav() {
             return this.$store.getters.HeaderNav
         },
-        User () {
+        User() {
             return this.$store.getters.User
         }
     },
-    mounted () {
+    mounted() {
         window.addEventListener('resize', this.checkMobile)
     },
     methods: {
-        checkMobile () {
+        checkMobile() {
             if (window.innerWidth > 800) {
                 this.$store.dispatch('hideHeaderNav')
             }
         },
-        toggleMNav () {
+        toggleMNav() {
             if (this.HeaderNav.show) {
                 this.$store.dispatch('hideHeaderNav')
             } else {

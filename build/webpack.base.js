@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const webpackHotMiddlewareConfig = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
+const webpackHotMiddlewareConfig = 'hapi-webpack-hot-middleware/node_modules/webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
 const getEntries = require('./getEntries')
 
 module.exports = {

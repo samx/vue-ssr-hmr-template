@@ -21,9 +21,9 @@ const productionConf = merge(baseConfig, {
             }
         }),
         new OptimizeCssAssetsPlugin({
-          cssProcessor: require('cssnano'),
-          cssProcessorOptions: { discardComments: {removeAll: true } },
-          canPrint: true
+            cssProcessor: require('cssnano'),
+            cssProcessorOptions: { discardComments: { removeAll: true } },
+            canPrint: true
         }),
         new webpack.LoaderOptionsPlugin({
             vue: {
@@ -38,7 +38,7 @@ const productionConf = merge(baseConfig, {
                         fallback: "vue-style-loader"
                     })
                 }
-                
+
             }
         }),
         new ExtractTextPlugin('css/[name].css')

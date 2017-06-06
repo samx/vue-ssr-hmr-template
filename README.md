@@ -6,7 +6,7 @@
 - Webpack2 
 - HotModuleReplacement 
 - Server Side Render
-- Express
+- HapiJS
 
 ## Build Setup
 
@@ -42,7 +42,7 @@ getEntries(
 
 ```
 const getEntries = require('./getEntries')
-const webpackHotMiddlewareConfig = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
+const webpackHotMiddlewareConfig = 'webpack-hot-middleware/node_modules/webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
 
 const developmentConf = merge(baseConfig, {
     ...
@@ -55,7 +55,7 @@ const developmentConf = merge(baseConfig, {
 
 ## Server Side Render 
 
-[vue-ssr](https://github.com/hilongjw/vue-ssr)
+[vue-ssr](https://github.com/samx/vue-ssr)
 [vue-server-renderer](https://github.com/vuejs/vue/tree/dev/packages/vue-server-renderer)
 
 ## License

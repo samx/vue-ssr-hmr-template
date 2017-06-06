@@ -1,53 +1,64 @@
-const express = require('express')
+const Hapi = require('hapi');
 const path = require('path')
-const http = require('http')
 global.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const PORT = 8080
 const isDev = NODE_ENV === 'development';
-const app = express()
-const router = require('./server/routers/router')
 
-app.set('views', path.join(__dirname, 'server/views'))
-app.set('view engine', 'pug')
+const server = new Hapi.Server();
+server.connection({
+    port: PORT
+});
 
-app.use(router)
+server.register([
+    require('inert'),
+    require('vision'),
+    require('./server/plugins/assets'),
+    require('./server/plugins/siteUI')
+], function (err) {
+
+});
 
 if (isDev) {
     // local variables for all views
-    app.locals.env = NODE_ENV;
-    app.locals.reload = true;
-    
+    //app.locals.env = NODE_ENV;
+    //app.locals.reload = true;
+
     // static assets served by webpack-dev-middleware & webpack-hot-middleware for development
-    const webpack = require('webpack')
-    const webpackDevMiddleware = require('webpack-dev-middleware')
-    const webpackHotMiddleware = require('webpack-hot-middleware')
     const webpackDevConfig = require('./build/webpack.config.js')
 
-    const compiler = webpack(webpackDevConfig)
+    const HapiWebpackDevMiddleware = require('hapi-webpack-dev-middleware');
+    const HapiWebpackHotMiddleware = require('hapi-webpack-hot-middleware');
 
-    app.use(webpackDevMiddleware(compiler, {
-        publicPath: webpackDevConfig.output.publicPath,
-        noInfo: true,
-        stats: {
-            colors: true
+    server.register([{
+        register: HapiWebpackDevMiddleware,
+        options: {
+            config: webpackDevConfig,
+            options: {
+                noInfo: true,
+                historyApiFallback: true,
+                publicPath: webpackDevConfig.output.publicPath,
+                stats: {
+                    colors: true
+                }
+            }
         }
-    }))
+    }, {
+        register: HapiWebpackHotMiddleware
+    }
+    ], function (err) {
+        if (err) throw err;
+    });
 
-    app.use(webpackHotMiddleware(compiler))
-
-    const server = http.createServer(app)
-
-    app.use(express.static(path.join(__dirname, 'public')))
-
-    server.listen(PORT, function(){
-        console.log('App (dev) is now running on PORT '+ PORT +'!')
-    })
+    server.start((err) => {
+        if (err) {
+            throw err;
+        }
+        console.log('Server running at:', server.info.uri);
+        if (process.env.NODE_ENV === 'development') {
+            //require("open")(`http://localhost:${PORT}`);
+        }
+    });
 } else {
-    // static assets served by express.static() for production
-    app.use(express.static(path.join(__dirname, 'public')))
-    
-    app.listen(PORT, function () {
-        console.log('App (production) is now running on PORT '+ PORT +'!')
-    })
+    console.log('not development');
 }
