@@ -13,17 +13,17 @@ const state = {
     HeaderNav: {
         show: false,
         navs: [{
-            text: '首页',
+            text: 'Home',
             route: {
                 name: 'home'
             }
         }, {
-            text: '文章',
+            text: 'Article',
             route: {
                 name: 'article'
             }
         }, {
-            text: '标签',
+            text: 'Tag',
             route: {
                 name: 'tag'
             }
@@ -32,17 +32,17 @@ const state = {
 }
 
 const mutations = {
-    SET_HEADER_NAV (state, active) {
+    SET_HEADER_NAV(state, active) {
         state.HeaderNav.show = active
     }
 }
 
 const actions = {
     // for mobile nav
-    showHeaderNav ({ commit }) {
+    showHeaderNav({ commit }) {
         commit('SET_HEADER_NAV', true)
     },
-    hideHeaderNav ({ commit }) {
+    hideHeaderNav({ commit }) {
         commit('SET_HEADER_NAV', false)
     }
 }
@@ -52,10 +52,10 @@ const getters = {
 }
 
 const store = new Vuex.Store({
-  state,
-  getters,
-  actions,
-  mutations
+    state,
+    getters,
+    actions,
+    mutations
 })
 
 export default store
