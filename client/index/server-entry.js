@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 export default context => {
   // set router's location
   router.push(context.url)
-  console.log(context.helloWorld);
+  console.log('isLogged', context.isLogged);
   const s = isDev && Date.now()
 
   // Call preFetch hooks on components matched by the route.
@@ -30,8 +30,8 @@ export default context => {
     // store to pick-up the server-side state without having to duplicate
     // the initial data fetching on the client.
 
-    let helloWorld = context.helloWorld;
-    context.initialState = Object.assign({}, store.state, { helloWorld });
+    let isLogged = context.isLogged;
+    context.initialState = Object.assign({}, store.state, { isLogged });
     store.replaceState(context.initialState);
 
     return app

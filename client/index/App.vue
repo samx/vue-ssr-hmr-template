@@ -13,12 +13,13 @@
   background-color: #fff;
   padding: 1rem;
 }
+
 @media all and (max-width: 768px) {
-    .content {
-        width: 100%;
-        padding: .5rem;
-        box-sizing: border-box;
-    }
+  .content {
+    width: 100%;
+    padding: .5rem;
+    box-sizing: border-box;
+  }
 }
 </style>
 <template>
@@ -29,9 +30,20 @@
 </template>
 <script>
 import umHeader from './components/Header.vue'
+import store from './store/';
+
 export default {
   components: {
     umHeader
+  },
+  mounted() {
+    /*
+    console.log('islogged:', localStorage.getItem('token'));
+    if (!!localStorage.getItem('token')) {
+    } else {
+      store.commit('LOGOUT_USER');
+    }
+    */
   }
 }
 </script>
