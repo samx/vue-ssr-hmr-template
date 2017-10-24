@@ -1,0 +1,17 @@
+https://api.twitch.tv/api/me?on_site=1
+{id: 447440, login: "samx10", name: "Samx10", is_staff: false, is_admin: false, is_partner: false,…}
+account_verified:false
+chat_oauth_token:"9a88rrtzgjlacrzwajjzirmot1a6lm"
+csrf_token:"6BBeia/uAJXvTuc0d9Y0orOEvTV0Nm1zdATZCxPdX2s="
+has_premium:false
+has_turbo:null
+id:447440
+is_admin:false
+is_broadcaster:true
+is_partner:false
+is_staff:false
+last_broadcast_time:null
+login:"samx10"
+logo:null
+name:"Samx10"
+twitter_connected:false

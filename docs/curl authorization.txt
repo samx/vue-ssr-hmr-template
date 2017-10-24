@@ -1,0 +1,6 @@
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer ya29.Gl2JBOxNJxsRVkzJ-VQByOV3FqOT9fq477RYEjeKtKQMgkB-NOukpmrxBI0Rp786M8nRFp4raLC
+W-MSqZHQBJPR8JO7n0TlYPRhN35Mf0ffR_dk9EBqkbcGA1MKbWxI" https://content.googleapis.com/youtube/v3/activities?part=contentDetails%2Csnippet&home=true&key=AIzaSyD-a9IF8KKYgoC3cpgS-Al7hLQDbugrDcw
+
+
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Authorization: Bearer ya29.Gl2JBOxNJxsRVkzJ-VQByOV3FqOT9fq477RYEjeKtKQMgkB-NOukpmrxBI0Rp786M8nRFp4raLC
+W-MSqZHQBJPR8JO7n0TlYPRhN35Mf0ffR_dk9EBqkbcGA1MKbWxI" https://www.googleapis.com/oauth2/v4/token

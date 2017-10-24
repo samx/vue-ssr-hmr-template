@@ -11,7 +11,7 @@ const indexRenderer = new VueSSR({
     contextHandler: function (req) {
         return {
             url: req.url,
-            helloWorld: 'Hello World 2'
+            isLogged: req.auth.isAuthenticated
         }
     },
     renderOptions,
@@ -43,11 +43,15 @@ exports.register = function (server, options, next) {
 
         server.route({
             method: 'GET', path: '/login', handler: function (request, reply) {
+                console.log('login');
                 reply(render('login', { title: 'login', bundle: 'login' }))
             }
         });
-
-
+        server.route({
+            method: 'GET', path: '/auth', handler: function (request, reply) {
+                reply(render('login', { title: 'Authentication', bundle: 'login' }))
+            }
+        });
 
         next();
     });
