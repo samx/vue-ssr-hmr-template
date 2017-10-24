@@ -1,9 +1,17 @@
-const Hapi = require('hapi');
-const path = require('path')
+const Hapi = require('hapi'),
+    path = require('path');
 global.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const PORT = 8080
 const isDev = NODE_ENV === 'development';
+const bell = {
+    provider: 'google',
+    isSecure: false,
+    password: 'password‐that‐is‐at‐least‐32‐chars',
+    clientId: '329871581471-f1prr8pontn6lptaub8jacodgguu216b.apps.googleusercontent.com',
+    clientSecret: 'uwQZhVBbI7SJ4w2T4kmDVE0K',
+    scope: ['profile', 'email', 'https://www.googleapis.com/auth/youtube.force-ssl']
+};
 
 const server = new Hapi.Server();
 server.connection({
@@ -11,10 +19,33 @@ server.connection({
 });
 
 server.register([
-    require('inert'),
-    require('vision'),
-    require('./server/plugins/assets'),
-    require('./server/plugins/siteUI')
+    { register: require('hapi-auth-cookie') },
+    { register: require('inert') },
+    { register: require('vision') },
+    { register: require('bell') },
+], function () {
+
+});
+
+server.register([
+    { register: require('./server/plugins/assets') },
+
+    { register: require('./server/plugins/postgresDB') },
+
+    {
+        register: require('./server/plugins/auth'),
+        options: {
+            bell: bell
+        }
+    },
+    { register: require('./server/plugins/siteUI') },
+
+    {
+        register: require('./server/plugins/youtubeAPI'),
+        options: {
+            bell: bell
+        }
+    }
 ], function (err) {
 
 });
@@ -55,6 +86,7 @@ if (isDev) {
             throw err;
         }
         console.log('Server running at:', server.info.uri);
+
         if (process.env.NODE_ENV === 'development') {
             //require("open")(`http://localhost:${PORT}`);
         }

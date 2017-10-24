@@ -137,7 +137,7 @@
     <header class="header">
         <div>
             <h2>
-                {{helloWorld}}</h2>
+                {{isLogged}}</h2>
         </div>
         <hr>
         <div class="header-nav-m" @click="toggleMNav">
@@ -145,7 +145,9 @@
         </div>
         <transition name="header-nav">
             <div class="header-nav-m-list" v-show="HeaderNav.show">
-                <router-link class="header-nav-item-m" :to="nav.route" v-for="nav in HeaderNav.navs">{{ nav.text }}</router-link>
+                <!--
+                        <router-link class="header-nav-item-m" :to="nav.route" v-for="nav in HeaderNav.navs">{{ nav.text }}</router-link>
+                    -->
             </div>
         </transition>
         <router-link class="header-logo" to="/home">
@@ -153,15 +155,23 @@
             <span class="header-logo-content">Cov-X</span>
         </router-link>
         <nav class="header-nav">
-            <router-link class="header-nav-item" :to="nav.route" v-for="nav in HeaderNav.navs">{{ nav.text }}</router-link>
+            <!-- <router-link class="header-nav-item" :to="nav.route" v-for="nav in HeaderNav.navs">{{ nav.text }}</router-link>
+                -->
         </nav>
         <slot></slot>
-        <router-link class="header-logo" to="/login" v-if="!User">
-            <div class="header-sign">
-                <button :button="button.signUp">signup</button>
-                <button :button="button.signIn">sign in</button>
-            </div>
-        </router-link>
+
+        <div class="header-sign">
+
+            <button @click="setLogged">set to logged</button>
+            <button @click="logoutUser">set to NOT logged</button>
+            <span v-if="isLogged">logged in ({{username }})</span>
+            <span v-if="!isLogged">logged out</span>
+            <!--
+                                                                                                            <button @click="signOut">signOut</button>
+                                                                                                            <button :button="button.signIn">sign in</button>
+                                                                                                            -->
+        </div>
+
     </header>
 </template>
 <script>
@@ -185,24 +195,39 @@ export default {
         }
     },
     computed: {
-        helloWorld() {
-            return this.$store.state.helloWorld;
+        isLogged() {
+            return this.$store.state.isLogged;
         },
         HeaderNav() {
             return this.$store.getters.HeaderNav
         },
-        User() {
-            return this.$store.getters.User
+        username() {
+            return this.$store.getters.username
         }
     },
     mounted() {
-        window.addEventListener('resize', this.checkMobile)
+        /*
+        if (this.isLogged) {
+            this.getUserProfile();
+        }
+        */
     },
     methods: {
-        checkMobile() {
-            if (window.innerWidth > 800) {
-                this.$store.dispatch('hideHeaderNav')
-            }
+        /*
+        getUserProfile() {
+            axios.get('/api/me').then((response) => {
+
+                this.response = JSON.stringify(response);
+            }, () => {
+
+            })
+        },
+        */
+        logoutUser() {
+            this.$store.dispatch('logoutUser');
+        },
+        setLogged() {
+            this.$store.dispatch('setLogged');
         },
         toggleMNav() {
             if (this.HeaderNav.show) {

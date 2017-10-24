@@ -1,0 +1,25 @@
+{ payload: 'grant_type=authorization_code&code=4%2FyTfmhuXkTUxvgA0iBhqg4yi7FP6p4lLCd-5yAlB
+gZ00&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fgoogle-auth&client_id=329871581471-f1prr
+8pontn6lptaub8jacodgguu216b.apps.googleusercontent.com&client_secret=uwQZhVBbI7SJ4w2T4kmDV
+E0K',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+{ provider: 'google',
+  token: 'ya29.GluKBOxpOL8BY8lFMACTQwilYOv7QWxbdJphq-inCQARuDMEv2-hpcDI-BUCFG5c7877Z-2t2r9
+ELChD3tpGXMQlS-Znx2UBMD7RZ6rtLeH6BQWVzxC-8asKNP05',
+  refreshToken: '1/FUyf7i0JVxEk2wuqIiQq8DKo9lPk9xQPnlWa5AsKHawB_G1VMSrPM_f6zxPed1rX',
+  expiresIn: 3600,
+  query: {},
+  profile:
+   { id: '115381423470472465555',
+     displayName: 'samx10',
+     name: { given_name: undefined, family_name: undefined },
+     email: 'samx10-5931@pages.plusgoogle.com',
+     raw:
+      { sub: '115381423470472465555',
+        name: 'samx10',
+        profile: 'https://plus.google.com/115381423470472465555',
+        picture: 'https://lh3.googleusercontent.com/-q1Smh9d8d0g/AAAAAAAAAAM/AAAAAAAAAAA/3
+YaY0XeTIPc/photo.jpg',
+        email: 'samx10-5931@pages.plusgoogle.com',
+        email_verified: true,
+        locale: 'en' } } }

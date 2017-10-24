@@ -10,7 +10,7 @@ const Login = require('../views/Login.vue')
 
 const router = new Router({
     mode: 'history',
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
         return { x: 0, y: 0 }
     },
     routes: [{
@@ -36,8 +36,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-    router.app.$store.dispatch('hideHeaderNav')
+    //router.app.$store.dispatch('hideHeaderNav')
     next()
 })
+
 
 export default router
